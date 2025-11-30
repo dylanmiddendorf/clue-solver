@@ -101,11 +101,22 @@ other_possible(Q,C) :- possible_holder(Q,C), possible_holder(P,C), player(P), P 
 :- unique_possible(P,C), not case(C), not holds(P,C).
 
 % Records the reason why a card was forced into the case file (for explanation/output).
-deduced_case(C,reason(no_one_has)) :- no_player_possible(C), case(C).
+% If no one responds to suggestion E, the suggested SUSPECT (C1) must be in the case file.
+deduced_case(C1, reason(no_response_to_suggestion(E))) :-
+    suggestion(E, _, C1, _, _), not responder(E, _), case(C1).
 
+% If no one responds to suggestion E, the suggested WEAPON (C2) must be in the case file.
+deduced_case(C2, reason(no_response_to_suggestion(E))) :-
+    suggestion(E, _, _, C2, _), not responder(E, _), case(C2).
+
+% If no one responds to suggestion E, the suggested ROOM (C3) must be in the case file.
+deduced_case(C3, reason(no_response_to_suggestion(E))) :-
+    suggestion(E, _, _, _, C3), not responder(E, _), case(C3).
+
+deduced_hold(P,C,reason(only_possible_holder)) :- unique_possible(P,C), holds(P,C), not case(C).
 deduced_not_have(P,C,reason(passed_event(E))) :- passed(E,P), suggested(E,C), -holds(P,C).
-
-% --------------- OUTPUT ---------------
+deduced_hold(P,C,reason(shown_event(E))) :- showed_card(E,P,C), holds(P,C).
+% --------------- OUTPUT (what to show in answer-sets) ---------------
 % players and positions (must match #const n)
 player(alice). pos(alice,0).
 player(bob). pos(bob,1).
@@ -119,12 +130,12 @@ room(study). room(kitchen). room(ballroom).
 
 suggestion(e1, alice, mustard, knife, study).
 responder(e1, bob).
-% showed(e1,bob).
+%showed_card(e1, bob, mustard).
 
 suggestion(e2, carol, plum, rope, kitchen).
-% no responder(e2) -> nobody showed for e2
 
 #show case/1.
+#show holds/2.
 #show deduced_case/2.
 #show deduced_hold/3.
 #show deduced_not_have/3.
