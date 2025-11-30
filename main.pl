@@ -1,3 +1,16 @@
+% Modeling the Game Clue Using Answer Set Programming
+
+% ------------------------------------------------------------
+% KRR Methodology:
+% This project uses the generate-and-test methodology combined with constraint satisfaction
+% to solve a combinatorial deduction problem based on the game Clue (Cluedo).
+%
+% 1) Generate: Possible card assignments (which players hold which cards, and which cards are in the case file).
+% 2) Test/Constraint: Observations are converted into logical constraints or negative facts, which prune
+%    impossible models.
+% 3) Define/Deduce: Rules are used to propogate knowledge, leading to a set of consistent answer sets.
+% ------------------------------------------------------------
+
 % -------------- DOMAIN (declare in instance) ----------------
 % player(P).         % players in play
 % pos(P,I).          % position index 0..n-1 (clockwise), used to compute who is asked before who
