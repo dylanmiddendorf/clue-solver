@@ -9,6 +9,9 @@ suspect(green). suspect(mustard). suspect(peacock).
 weapon(knife). weapon(rope). weapon(wrench).
 room(kitchen). room(ballroom). room(conservatory).
 
+% Initial hand
+holds(p1, green). holds(p1, knife).
+
 % Event 1: p2 -> green / rope / kitchen
 % p3 responds
 suggestion(e1, p1, green, rope, kitchen).

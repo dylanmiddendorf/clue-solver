@@ -9,6 +9,9 @@ suspect(mustard). suspect(scarlet). suspect(plum).
 weapon(knife). weapon(rope). weapon(candlestick).
 room(kitchen). room(study). room(lounge).
 
+% Initial hand
+holds(p3, mustard). holds(p3, lounge).
+
 % Event 1: p1 -> mustard / knife / kitchen   (p2 responds)
 suggestion(e1, p1, mustard, knife, kitchen).
 responder(e1, p2).

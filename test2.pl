@@ -9,6 +9,9 @@ suspect(green). suspect(plum). suspect(scarlet). suspect(mustard).
 weapon(knife). weapon(revolver). weapon(pipe). weapon(rope).
 room(study). room(library). room(lounge).
 
+% Initial hand
+holds(p4, revolver). holds(p4, library).
+
 % Event 1: p2 -> plum / knife / lounge
 % No responder (everyone passed)
 suggestion(e1, p2, plum, knife, lounge).
